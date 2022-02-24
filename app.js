@@ -27,12 +27,47 @@ content:String
 
 const Article = mongoose.model("Article",articleSchema);
 
-app.get("/articles",function(req,res){
+app.get("/articles",function(req, res){
 
     Article.find(function(err,foundArticles){
-
+    if(!err)
+    {
         res.send(foundArticles);
+    }
+    else
+    res.send(err);
+       
     });
+});
+
+app.post("/articles",function(req, res){
+
+   console.log()
+    console.log()
+ const newArticle = new Article({
+
+    title: req.body.title,
+    content: req.body.content
+
+ });
+
+ newArticle.save(function(err){
+
+  if(!err)
+  {
+      res.send("Successfully new data added");
+
+  }
+  else{
+
+    res.send(err); 
+
+  }
+    
+
+ });
+
+
 });
 
 
